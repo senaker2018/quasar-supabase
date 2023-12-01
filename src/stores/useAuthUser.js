@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import useSupabase from 'src/boot/supabase'
-import {ref} from 'vue'
+import { ref } from 'vue'
 
 export const useAuthUserStore = defineStore('useAuthUser', () => {
   const { supabase } = useSupabase()
@@ -31,22 +31,22 @@ export const useAuthUserStore = defineStore('useAuthUser', () => {
         redirectTo: `${window.location.origin}/me?fromEmail=registrationConfirmation`
       }
     )
-    if ( error ) throw error
+    if (error) throw error
     return user
   }
 
-  const update = async ( data ) => {
-    const { user,error } = await supabase.auth.update(data)
-    if ( error ) throw error
+  const update = async (data) => {
+    const { user, error } = await supabase.auth.update(data)
+    if (error) throw error
     return user
   }
 
-  const sendPasswordRestEmail = async ( email ) => {
-    const { user,error} = await supabase.auth.api.resetPasswordForEmail(email)
-    if ( error ) throw error
+  const sendPasswordRestEmail = async (email) => {
+    const { user, error } = await supabase.auth.api.resetPasswordForEmail(email)
+    if (error) throw error
     return user
   }
   return {
-    user, login, loginWithSoicialProvider, isLoggedIn, update, sendPasswordRestEmail,register,logout
+    user, login, loginWithSoicialProvider, isLoggedIn, update, sendPasswordRestEmail, register, logout
   }
 })
